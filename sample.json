@@ -1,0 +1,22 @@
+{
+    "one": 1,
+    "two": 2,
+    "obj": {
+        "three": 3,
+        "four": 4,
+        "obj": {
+            "five": 5,
+            "six": 6
+        }
+    },
+    "array": [
+        {
+            "one": 1, 
+            "two": 2,
+            "obj": {
+                "three": 3,
+                "four": 4
+            }
+        }
+    ]
+}

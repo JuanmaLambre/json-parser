@@ -1,0 +1,40 @@
+#!/usr/bin/python
+
+import sys
+import json
+
+
+def jsonize(jsonstr):
+    return json.loads(jsonstr)
+
+def dejsonize(d):
+    return json.dumps(d)
+
+def pretty(jsonobj):
+    return json.dumps(jsonobj, indent=4)
+
+
+def main():
+    jsonFile = sys.stdin.read()
+    jsonobj = jsonize(jsonFile)
+    path = sys.argv[1:]
+
+    for key in path:
+        if type(jsonobj) is dict:
+            try:
+                jsonobj = jsonobj[key]
+            except KeyError:
+                print "error: {} key does not exists on json\n{}".format(key, pretty(jsonobj))
+                return 2
+        elif type(jsonobj) is list:
+            jsonobj = jsonobj[int(key)]
+        elif type(jsonobj) in [int, str]:
+            print "error: Type {} is atomic".format(type(jsonobj).__name__)
+            return 1
+
+    print pretty(jsonobj)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())
